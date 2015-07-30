@@ -5,5 +5,6 @@ from .views import PostCollection
 
 urlpatterns = patterns(
     url(r'blogposts/$',
-        PostCollection.as_view())
+        PostCollection.as_view(),
+        name='posts')
 )
