@@ -19,4 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'accounts/', include('authtools.urls')),
+
+    # third party urls
+    url(r'^markdown/', include('django_markdown.urls')),
 ]

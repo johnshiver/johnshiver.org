@@ -40,6 +40,10 @@ INSTALLED_APPS = (
 
     # third party
     'authtools',
+    'django_markdown',
+
+    # my apps
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
