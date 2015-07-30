@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     # third party
     'authtools',
     'django_markdown',
+    'rest_framework',
 
     # my apps
     'blog',
