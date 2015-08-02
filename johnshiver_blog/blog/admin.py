@@ -7,6 +7,9 @@ from pagedown.widgets import AdminPagedownWidget
 
 
 class PostAdmin(admin.ModelAdmin):
+
+    list_display = ('title', 'created', 'views')
+
     formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
