@@ -1,27 +1,40 @@
 from django.shortcuts import render
+from django.views.generic import View, ListView, DetailView
 
-from rest_framework import mixins, generics
-
-from .serializers import PostSerializer
 from .models import Post
 
 
-class PostCollection(mixins.ListModelMixin,
-                     generics.GenericAPIView):
+class MainPageView(View):
     """
-    API View for All Blog Posts
+    View for Main page
 
-    GET request: all Post objects
-
-    ListModelMixin: provides list(request)
-      - allows you to serializes a collection to JSON and return it
-
-    GenericAPIView: provides core functionality
-      - also provides browseable API
+    Displays
+     - five most recent posts
+     - five most recent grams
+     - five most recent tweets
     """
+    def get(self, request):
+        pass
 
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+
+class AllBlogPostsView(ListView):
+    """
+    View that returns list of all blog posts
+    """
+    template_name = "blog/post_list.html"
+    context_object_name = "posts"
+    model = Post
+    fields = ('title', 'content', 'created', 'author')
 
     def get(self, request):
-        return self.list(request)
+        pass
+
+
+class BlogPostView(DetailView):
+    """
+    View that displays individual blog post
+    """
+    template_name = "blog/single_post.html"
+    context_object_name = "post"
+    model = Post
+    fields = ('title', 'content', 'created', 'author')

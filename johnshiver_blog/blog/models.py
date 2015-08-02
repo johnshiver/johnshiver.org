@@ -3,9 +3,10 @@ from django.template.defaultfilters import slugify
 
 from model_utils.models import TimeStampedModel
 from django_markdown.models import MarkdownField
-
+from authtools.models import User
 
 class Post(TimeStampedModel):
+    author = models.ForeignKey(User)
     title = models.CharField(max_length=200)
     content = MarkdownField()
     slug = models.SlugField(max_length=500)
