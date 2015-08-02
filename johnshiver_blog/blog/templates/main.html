@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+<h2>About me:</h2>
+<div class="post-content">
+    <p>
+        In 2014 I learned to code, moved from Philly to Seattle for the <a
+            href="http://www.codefellows.org">Codefellows Python Dev
+        Accelerator</a>,
+        and now I work as a backend developer at <a
+            href="http://www.offerupnow.com">OfferUp</a>.
+        <br>
+        <br>
+        I primarily program in Python and enjoy making web apps in Django /
+        Flask. I love to share and try to be active on github, the code for
+        this blog can be found <a
+            href="https://github.com/johnshiver/learning_journal">here</a>.
+
+    </p>
+
+    <br/>
+
+    <h2>Recent posts:</h2>
+
+    <table class="table table-condensed">
+        {% for post in posts %}
+        <tr>
+            <td style="font-size: 15px" width="10%">
+                {{ post.created|date:"m/d/y" }}
+            </td>
+            <td><a href="/blog/{{post.slug}}"> {{ post.title }}</a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <br/>
+
+    <h2>Recent grams:</h2>
+
+    <div class="row">
+        {% for gram in grams%}
+        <div class="col-xs-3 col-md-3">
+            <a href="{{ gram.url }}" class="grams thumbnail">
+                <img src="{{ gram.photo }}">
+            </a>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    </br>
+
+    <h2>Recent tweets:</h2>
+
+    <div class="tweets">
+        <table class='table table-condensed'>
+            {% for tweet in tweets %}
+            <tr>
+                <td>
+                    <div class="tweet-date">{{ tweet.date|date:"b d" }}
+                    </div>
+                </td>
+                <td>
+                    <div class="tweet-content">{{tweet.text}}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</p>
+</div>
+
+{% endblock %}
