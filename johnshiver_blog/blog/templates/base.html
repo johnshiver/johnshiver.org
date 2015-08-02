@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>John Shiver's Blog</title>
+
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css"
+          href="/static/main.css" media="screen">
+
+    <link rel="stylesheet" type="text/css"
+          href="/static/style.css" media="screen">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="nvabar-brand"><img class="top-photo hidden-xs"
+                                                  alt=""
+                                                  src="/static/assets/photo.jpg"/></a>
+            {# <a class="navbar-brand" href="/">John Shiver's Blog</a> #}
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a class="blog-primary-navigation" href="/">John
+                    Shiver</a></li>
+                <li class="active"><a class="blog-navigation" href="/code">Coder</a>
+                </li>
+                <li class="active"><a class="blog-navigation"
+                                      href="/all_posts">Writer</a></li>
+                <li class="active"><a class="blog-navigation" href="/books">Reader</a>
+                </li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container">
+
+
+    <body>
+    <main>
+        <section id="content">
+            {% block body %}{% endblock %}
+        </section>
+    </main>
+    <div id="icons">
+        <a class="icon" href="https://www.facebook.com/johneshiver"><img
+                src="/static/icons/facebook.png"></a>
+        <a class="icon" href="https://twitter.com/TrustyJohn"><img
+                src="/static/icons/twitter.png"></a>
+        <a class="icon"
+           href="http://www.linkedin.com/pub/john-shiver/49/765/129"><img
+                src="/static/icons/linkedin.png"></a>
+        <a class="icon" href="https://github.com/johnshiver"><img
+                src="/static/icons/github-48-black.png"></a>
+        <a class="icon" href="mailto:johneshiver@gmail.com"><img
+                src="/static/icons/email.png"></a>
+
+
+    </div>
+
+    </body>
+
+
+</div>
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/twitter.js"></script>
+</body>
+</html>

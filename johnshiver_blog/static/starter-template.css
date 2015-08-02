@@ -1,0 +1,14 @@
+body {
+  padding-top: 50px;
+}
+main {
+    
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}

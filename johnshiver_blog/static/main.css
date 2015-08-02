@@ -1,0 +1,142 @@
+
+a:link{
+
+    /*color: #fc140c;*/
+}
+
+.post-content li {
+    /*list-style: none;*/
+}
+
+.top-photo {
+    border-radius:100%;
+    height:75px;
+    width:75x;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.navbar-nav{
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+a {
+    text-align: left;
+}
+
+div.entry-title {
+    font-size: 15px;
+}
+
+.blog-primary-navigation{
+    font-size: 35px;
+    margin-right: 15px;
+}
+
+.blog-navigation{
+    font-size: 15px;
+    margin-right: 15px;
+}
+
+
+
+body {
+
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    padding-top: 50px;
+    max-width: 750px;
+
+}
+
+h1{
+
+    text-align: center;
+
+}
+
+h2{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+div.field{
+    position: relative;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+
+}
+
+div.control_row{
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.tweets {
+    font-size: 17px;
+}
+
+.grams {
+    display: inline-block;
+    padding: 1px;
+}
+
+.tweet-date {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tweet-content {
+    font-size: 10px;
+}
+
+.post-heading {
+    position: relative;
+    padding-top: 35px;
+    border-bottom: 3px solid #666;
+}
+
+.post-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.post-date {
+    color: #999;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.post-content {
+    margin-top: 5px;
+    margin-bottom: 45px;
+    font-size: 20px;
+    text-align: left;
+}
+
+footer{
+    border-top: 1px solid #666;
+    padding-top: 15px;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#icons {
+    text-align: center;
+    bottom: 0px;
+    right: 0px;
+}
+
+.icon {
+    margin-right: 25px;
+}

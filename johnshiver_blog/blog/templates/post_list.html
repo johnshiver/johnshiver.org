@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+<h2>All posts:</h2>
+
+<table class="table table-condensed">
+    {% for post in posts %}
+    <tr>
+        <td>
+            <div class="tweet-date">{{ post.created|date  }}
+            </div>
+        </td>
+        <td><a href="/blog/{{post.slug}}"> {{ post.title }}</a></td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}

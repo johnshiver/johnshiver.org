@@ -1,10 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from .views import PostCollection
+from .views import MainPageView, AllBlogPostsView, BlogPostView
 
+urlpatterns = [
 
-urlpatterns = patterns(
-    url(r'blogposts/$',
-        PostCollection.as_view(),
-        name='posts')
-)
+    url(r'all_posts/',
+        AllBlogPostsView.as_view(),
+        name='all-posts')
+]

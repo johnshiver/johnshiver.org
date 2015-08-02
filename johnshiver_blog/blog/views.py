@@ -13,6 +13,7 @@ class MainPageView(View):
      - five most recent grams
      - five most recent tweets
     """
+
     def get(self, request):
         pass
 
@@ -21,20 +22,17 @@ class AllBlogPostsView(ListView):
     """
     View that returns list of all blog posts
     """
-    template_name = "blog/post_list.html"
+    template_name = "post_list.html"
     context_object_name = "posts"
     model = Post
     fields = ('title', 'content', 'created', 'author')
-
-    def get(self, request):
-        pass
 
 
 class BlogPostView(DetailView):
     """
     View that displays individual blog post
     """
-    template_name = "blog/single_post.html"
+    template_name = "single_post.html"
     context_object_name = "post"
     model = Post
     fields = ('title', 'content', 'created', 'author')
