@@ -16,9 +16,5 @@ class Post(TimeStampedModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            # this code should only happen
-            # if object not in db yet
-            # only want it to execute once
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super().save(*args, **kwargs)
