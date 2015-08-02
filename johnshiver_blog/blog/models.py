@@ -2,13 +2,13 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from model_utils.models import TimeStampedModel
-from django_markdown.models import MarkdownField
-from authtools.models import User
+from markdown import markdown
 
 
 class Post(TimeStampedModel):
     title = models.CharField(max_length=200)
-    content = MarkdownField()
+    body = models.TextField()
+    body_html = models.TextField(editable=False, blank=True, null=True)
     slug = models.SlugField(max_length=500, blank=True)
     views = models.IntegerField(default=0)
 
@@ -17,4 +17,5 @@ class Post(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        self.body_html = markdown(self.body, ['codehilite'])
         super().save(*args, **kwargs)

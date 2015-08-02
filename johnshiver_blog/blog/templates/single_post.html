@@ -14,7 +14,7 @@
         <div class="post-date">
             Posted on {{ post.created|date:"m/d/y" }}
         </div>
-        {{ post.content|safe }}
+        {{ post.body_html|safe }}
         <br/>
         <br/>
         <a href="https://twitter.com/share" class="twitter-share-button"

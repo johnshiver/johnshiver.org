@@ -20,10 +20,10 @@ from blog import urls as blog_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'accounts/', include('authtools.urls')),
+
 
     # third party urls
-    url(r'^markdown/', include('django_markdown.urls')),
+    url(r'accounts/', include('authtools.urls')),
 
     # main app
     url(r'blog/', include(blog_urls)),
