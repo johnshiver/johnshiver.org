@@ -5,6 +5,7 @@ from django.core.cache import cache
 from .models import Post
 from utils.social_media_tools import SocialMedia
 
+
 class MainPageView(View):
     """
     View for Main page
@@ -31,7 +32,7 @@ class MainPageView(View):
                       "main.html",
                       {"posts": posts,
                        "grams": grams,
-                       "tweets": tweets,})
+                       "tweets": tweets, })
 
 
 class AllBlogPostsView(ListView):
@@ -41,6 +42,7 @@ class AllBlogPostsView(ListView):
     template_name = "post_list.html"
     context_object_name = "posts"
     model = Post
+    ordering = '-created'
     fields = ('title', 'content', 'created', 'author')
 
 

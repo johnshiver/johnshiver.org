@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'b!edh$m693)x!*@vchkz*=n+*m638i$=_v+8^rq7f0&*!x*^kb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.johnshiver.org',]
-
+# ALLOWED_HOSTS = ['www.johnshiver.org', ]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -131,7 +131,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 

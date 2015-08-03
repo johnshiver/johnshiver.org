@@ -18,7 +18,7 @@ class SocialMedia(object):
     def get_grams(self):
         gram_api = InstagramAPI(access_token=self.gram_access_token)
         grams, nex = gram_api.user_recent_media(user_id='11728698',
-                                                     count=4)
+                                                count=4)
         gram_package = []
 
         for gram in grams:
@@ -40,8 +40,7 @@ class SocialMedia(object):
 
         pay_load = []
         for tweet in tweets:
-            tweet_json = {}
-            tweet_json['text'] = tweet._json['text']
+            tweet_json = {'text': tweet._json['text']}
             date = tweet._json['created_at']
             tweet_json['date'] = parser.parse(date)
             pay_load.append(tweet_json)
