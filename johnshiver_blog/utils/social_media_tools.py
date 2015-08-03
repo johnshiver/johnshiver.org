@@ -9,12 +9,12 @@ class SocialMedia(object):
     def __init__(self):
 
         self.gram_access_token = os.environ.get('gram_access_token', None)
-
         self.consumer_key = os.environ.get('consumer_key', None)
         self.consumer_secret = os.environ.get('consumer_secret', None)
         self.access_token = os.environ.get('access_token', None)
         self.access_token_secret = os.environ.get('access_token_secret', None)
 
+    @property
     def get_grams(self):
         gram_api = InstagramAPI(access_token=self.gram_access_token)
         grams, nex = gram_api.user_recent_media(user_id='11728698',
@@ -31,6 +31,7 @@ class SocialMedia(object):
 
         return gram_package
 
+    @property
     def get_tweets(self):
         auth = OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_token_secret)

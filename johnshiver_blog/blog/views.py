@@ -22,11 +22,11 @@ class MainPageView(View):
 
         grams = cache.get('grams')
         if not grams:
-            grams = media_tools.get_grams()
+            grams = media_tools.get_grams
             cache.set('grams', grams, timeout=600)
         tweets = cache.get('tweets')
         if not tweets:
-            tweets = media_tools.get_tweets()
+            tweets = media_tools.get_tweets
             cache.set('tweets', tweets, timeout=600)
         return render(request,
                       "main.html",
