@@ -17,17 +17,15 @@ class MainPageView(View):
     """
 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by('-created')[:5]
-        media_tools = SocialMedia()
+        posts = cache.get('all-posts')
+        if not posts:
+            posts = Post.objects.all().order_by('-created')[:5]
+            cache.set('all-posts', posts, 300)
 
-        grams = cache.get('grams')
-        if not grams:
-            grams = media_tools.get_grams
-            cache.set('grams', grams, timeout=600)
-        tweets = cache.get('tweets')
-        if not tweets:
-            tweets = media_tools.get_tweets
-            cache.set('tweets', tweets, timeout=600)
+        media_tools = SocialMedia()
+        grams = media_tools.get_grams
+        tweets = media_tools.get_tweets
+
         return render(request,
                       "main.html",
                       {"posts": posts,

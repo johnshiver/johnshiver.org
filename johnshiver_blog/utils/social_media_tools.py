@@ -1,5 +1,7 @@
 import os
 
+from django.core.cache import cache
+
 from instagram.client import InstagramAPI
 from tweepy import OAuthHandler, API
 from dateutil import parser
@@ -16,34 +18,42 @@ class SocialMedia(object):
 
     @property
     def get_grams(self):
-        gram_api = InstagramAPI(access_token=self.gram_access_token)
-        grams, nex = gram_api.user_recent_media(user_id='11728698',
-                                                count=4)
-        gram_package = []
+        grams = cache.get('grams')
+        if not grams:
+            gram_api = InstagramAPI(access_token=self.gram_access_token)
+            grams, nex = gram_api.user_recent_media(user_id='11728698',
+                                                    count=4)
+            gram_package = []
 
-        for gram in grams:
-            gram_json = {}
-            photo = str(gram.images['thumbnail'])
-            photo = photo[7:]
-            gram_json['photo'] = photo
-            gram_json['url'] = gram.link
-            gram_package.append(gram_json)
+            for gram in grams:
+                gram_json = {}
+                photo = str(gram.images['thumbnail'])
+                photo = photo[7:]
+                gram_json['photo'] = photo
+                gram_json['url'] = gram.link
+                gram_package.append(gram_json)
 
-        return gram_package
+            cache.set('grams', gram_package, 300)
+            return gram_package
+        else:
+            return grams
 
     @property
     def get_tweets(self):
-        auth = OAuthHandler(self.consumer_key, self.consumer_secret)
-        auth.set_access_token(self.access_token, self.access_token_secret)
-        api = API(auth)
+        tweets = cache.get('tweets')
+        if not tweets:
+            auth = OAuthHandler(self.consumer_key, self.consumer_secret)
+            auth.set_access_token(self.access_token, self.access_token_secret)
+            api = API(auth)
 
-        tweets = api.user_timeline(screen_name='TrustyJohn', count=5)
+            tweets = api.user_timeline(screen_name='TrustyJohn', count=5)
 
-        pay_load = []
-        for tweet in tweets:
-            tweet_json = {'text': tweet._json['text']}
-            date = tweet._json['created_at']
-            tweet_json['date'] = parser.parse(date)
-            pay_load.append(tweet_json)
-
-        return pay_load
+            pay_load = []
+            for tweet in tweets:
+                tweet_json = {'text': tweet._json['text']}
+                date = tweet._json['created_at']
+                tweet_json['date'] = parser.parse(date)
+                pay_load.append(tweet_json)
+            cache.set('tweets', pay_load, 300)
+            return pay_load
+        return tweets
