@@ -1,9 +1,9 @@
+from django.core.cache import cache
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
-from django.core.cache import cache
+from utils.social_media_tools import SocialMedia
 
 from .models import Post
-from utils.social_media_tools import SocialMedia
 
 
 class MainPageView(View):
@@ -23,8 +23,9 @@ class MainPageView(View):
             cache.set('all-posts', posts, 300)
 
         media_tools = SocialMedia()
-        grams = media_tools.get_grams
-        tweets = media_tools.get_tweets
+        grams = media_tools.grams
+        tweets = media_tools.tweets
+
 
         return render(request,
                       "main.html",

@@ -96,6 +96,13 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': '/Users/js231813/PycharmProjects/johnshiver.org/johnshiver_blog/blog.sqlite3',
+#     }
+# }
+
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
@@ -137,3 +144,6 @@ STATICFILES_FINDERS = (
 
 # User related settings
 AUTH_USER_MODEL = 'authtools.User'
+
+
+# Third party api keys

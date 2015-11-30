@@ -1,10 +1,9 @@
 import os
 
+from dateutil import parser
 from django.core.cache import cache
-
 from instagram.client import InstagramAPI
 from tweepy import OAuthHandler, API
-from dateutil import parser
 
 
 class SocialMedia(object):
@@ -17,7 +16,7 @@ class SocialMedia(object):
         self.access_token_secret = os.environ.get('access_token_secret', None)
 
     @property
-    def get_grams(self):
+    def grams(self):
         grams = cache.get('grams')
         if not grams:
             gram_api = InstagramAPI(access_token=self.gram_access_token)
@@ -39,7 +38,7 @@ class SocialMedia(object):
             return grams
 
     @property
-    def get_tweets(self):
+    def tweets(self):
         tweets = cache.get('tweets')
         if not tweets:
             auth = OAuthHandler(self.consumer_key, self.consumer_secret)
