@@ -20,29 +20,29 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b!edh$m693)x!*@vchkz*=n+*m638i$=_v+8^rq7f0&*!x*^kb'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.johnshiver.org', ]
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['www.johnshiver.org', ]
+ALLOWED_HOST = []
 
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    'redis_cache',
+
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # third party
-    'authtools',
     'rest_framework',
     'pagedown',
-    'redis_cache',
 
     # my apps
     'blog',
@@ -88,26 +88,26 @@ WSGI_APPLICATION = 'johnshiver_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASS'],
+        'HOST': os.environ['DB_SERVICE'],
+        'PORT': os.environ['DB_PORT']
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': '/Users/js231813/PycharmProjects/johnshiver.org/johnshiver_blog/blog.sqlite3',
-#     }
-# }
 
 CACHES = {
-    'default': {
+    "default": {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': 'localhost:6379',
-    },
+        "LOCATION": "{0}/{1}".format(os.environ.get('REDIS_1_PORT', default="redis://127.0.0.1:6379"), 0),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
+                                        # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+        }
+    }
 }
 
 # Internationalization
@@ -142,8 +142,3 @@ STATICFILES_FINDERS = (
 )
 
 
-# User related settings
-AUTH_USER_MODEL = 'authtools.User'
-
-
-# Third party api keys

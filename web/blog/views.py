@@ -1,7 +1,7 @@
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
-from utils.social_media_tools import SocialMedia
+from utils import SocialMedia
 
 from .models import Post
 
@@ -26,12 +26,11 @@ class MainPageView(View):
         grams = media_tools.grams
         tweets = media_tools.tweets
 
-
         return render(request,
                       "main.html",
                       {"posts": posts,
                        "grams": grams,
-                       "tweets": tweets, })
+                       "tweets": tweets,})
 
 
 class AllBlogPostsView(ListView):

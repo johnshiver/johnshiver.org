@@ -23,7 +23,6 @@ class SocialMedia(object):
             grams, nex = gram_api.user_recent_media(user_id='11728698',
                                                     count=4)
             gram_package = []
-
             for gram in grams:
                 gram_json = {}
                 photo = str(gram.images['thumbnail'])
@@ -31,11 +30,10 @@ class SocialMedia(object):
                 gram_json['photo'] = photo
                 gram_json['url'] = gram.link
                 gram_package.append(gram_json)
-
             cache.set('grams', gram_package, 300)
-            return gram_package
-        else:
-            return grams
+            grams = gram_package
+
+        return grams
 
     @property
     def tweets(self):
@@ -46,7 +44,6 @@ class SocialMedia(object):
             api = API(auth)
 
             tweets = api.user_timeline(screen_name='TrustyJohn', count=5)
-
             pay_load = []
             for tweet in tweets:
                 tweet_json = {'text': tweet._json['text']}
@@ -54,5 +51,5 @@ class SocialMedia(object):
                 tweet_json['date'] = parser.parse(date)
                 pay_load.append(tweet_json)
             cache.set('tweets', pay_load, 300)
-            return pay_load
+            tweets = pay_load
         return tweets

@@ -18,6 +18,4 @@ class PostAdmin(admin.ModelAdmin):
     def url_title(obj):
         return reverse('blog-post', args=[obj.slug])
 
-
-
 admin.site.register(Post, PostAdmin)

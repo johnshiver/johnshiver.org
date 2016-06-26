@@ -22,9 +22,6 @@ from blog.views import MainPageView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    # third party urls
-    url(r'accounts/', include('authtools.urls')),
-
     # main app
     url(r'blog/', include(blog_urls)),
     url(r'^$', MainPageView.as_view(), name='home'),
