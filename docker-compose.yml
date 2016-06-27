@@ -10,10 +10,10 @@ web:
     - ./web:/usr/src/app
     - ./web/static:/usr/src/app/static
   env_file: .env
-  command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8000 --reload
+  command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8001 --reload
 
 nginx:
-#  restart: always
+  restart: always
   build: ./nginx/
   ports:
     - "80:80"

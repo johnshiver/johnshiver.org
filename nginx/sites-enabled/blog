@@ -1,9 +1,7 @@
-
-
 server {
 
     listen 80;
-    server_name "";
+    server_name example.org;
     charset utf-8;
 
     access_log /var/log/nginx/access;
@@ -14,7 +12,6 @@ server {
     }
 
     location / {
-
         proxy_pass http://web:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

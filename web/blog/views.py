@@ -8,8 +8,6 @@ from .models import Post
 
 class MainPageView(View):
     """
-    View for Main page
-
     Displays
      - five most recent posts
      - five most recent grams
@@ -23,7 +21,9 @@ class MainPageView(View):
             cache.set('all-posts', posts, 300)
 
         media_tools = SocialMedia()
-        grams = media_tools.grams
+        # TODO: for some reason instagram no longer works, need to fix
+        # grams = media_tools.grams
+        grams = None
         tweets = media_tools.tweets
 
         return render(request,
