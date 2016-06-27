@@ -10,7 +10,7 @@ web:
     - ./web:/usr/src/app
     - ./web/static:/usr/src/app/static
   env_file: .env
-  command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8001 --reload
+  command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8000 --reload
 
 nginx:
   restart: always
@@ -36,7 +36,7 @@ redis:
   restart: always
   image: redis:latest
   ports:
-    - "6379:6379"
+    - "6380:6380"
 
 data:
   restart: always
