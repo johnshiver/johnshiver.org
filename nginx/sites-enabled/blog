@@ -1,14 +1,20 @@
+
+
 server {
 
     listen 80;
-    server_name example.org;
+    server_name "";
     charset utf-8;
+
+    access_log /var/log/nginx/access;
+    error_log /var/log/nginx/error debug;
 
     location /static {
         alias /usr/src/app/static;
     }
 
     location / {
+
         proxy_pass http://web:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

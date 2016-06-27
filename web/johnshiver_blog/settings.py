@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 # ALLOWED_HOSTS = ['www.johnshiver.org', ]
-ALLOWED_HOST = []
+ALLOWED_HOST = ['*', '127.0.0.1'    ]
 
 # Application definition
 

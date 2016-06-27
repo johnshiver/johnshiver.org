@@ -13,7 +13,7 @@ web:
   command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8000 --reload
 
 nginx:
-  restart: always
+#  restart: always
   build: ./nginx/
   ports:
     - "80:80"
