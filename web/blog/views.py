@@ -25,12 +25,15 @@ class MainPageView(View):
         # grams = media_tools.grams
         grams = None
         tweets = media_tools.tweets
+        commits = media_tools.commits
+        print(commits)
 
         return render(request,
                       "main.html",
                       {"posts": posts,
+                       "commits": commits[:5],
                        "grams": grams,
-                       "tweets": tweets,})
+                       "tweets": tweets[:5],})
 
 
 class AllBlogPostsView(ListView):

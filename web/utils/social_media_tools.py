@@ -1,19 +1,27 @@
+from collections import namedtuple
+import logging
 import os
 
 from dateutil import parser
 from django.core.cache import cache
+
+from github import Github
 from instagram.client import InstagramAPI
 from tweepy import OAuthHandler, API
 
 
+logger = logging.getLogger(__name__)
+
+Push = namedtuple("Push", ["repo_name", "repo_url", "message",
+                           "date", "number_of_commits"])
+
 class SocialMedia(object):
     def __init__(self):
-
-        self.gram_access_token = os.environ.get('gram_access_token', None)
-        self.consumer_key = os.environ.get('consumer_key', None)
-        self.consumer_secret = os.environ.get('consumer_secret', None)
-        self.access_token = os.environ.get('access_token', None)
-        self.access_token_secret = os.environ.get('access_token_secret', None)
+        self.gram_access_token = os.environ.get('gram_access_token')
+        self.consumer_key = os.environ.get('consumer_key')
+        self.consumer_secret = os.environ.get('consumer_secret')
+        self.access_token = os.environ.get('access_token')
+        self.access_token_secret = os.environ.get('access_token_secret')
 
     @property
     def grams(self):
@@ -53,3 +61,37 @@ class SocialMedia(object):
             cache.set('tweets', pay_load, 300)
             tweets = pay_load
         return tweets
+
+    @property
+    def commits(self):
+        logger.info("this is a test log")
+        commits = cache.get('commits')
+        if not commits:
+            commits = []
+            github_user = os.getenv("github_user")
+            github_pw = os.getenv("github_pw")
+            try:
+                github_api = Github(github_user, github_pw)
+            except Exception as e:
+                print("Error contacting github {}".format(e))
+                return []
+            my_user = github_api.get_user("johnshiver")
+            recent_commits = [x for x in my_user.get_public_events()
+                              if x.type == "PushEvent"]
+            for commit in recent_commits:
+                repo_name = commit.raw_data["repo"]["name"]
+                repo_url = commit.raw_data["repo"]["url"]
+                repo_url = repo_url.replace("api.", "")
+                repo_url = repo_url.replace("repos/", "")
+                number_of_commits = len(commit.raw_data["payload"]["commits"])
+                message = commit.raw_data["payload"]["commits"][0]["message"]
+                date = parser.parse(commit.raw_data["created_at"])
+                commits.append(Push(repo_name=repo_name,
+                                    repo_url=repo_url,
+                                    message=message,
+                                    date=date,
+                                    number_of_commits=number_of_commits))
+            cache.set('commits', commits[:5], 300)
+        return commits
+
+

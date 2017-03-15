@@ -10,7 +10,7 @@
         Accelerator</a>.
         I landed my first job as a backend developer at <a
             href="http://www.offerupnow.com">OfferUp</a>, and now am back on the
-        east coast in NYC working at <a href="https://www.wayup.com">WayUp</a>.
+        east coast in NYC working at <a href="https://www.yext.com">Yext</a>.
         <br>
         <br>
         I primarily program in Python and wrote this blog in Python3 with Django,
@@ -18,8 +18,6 @@
             href="https://github.com/johnshiver/johnshiver.org">here</a>.
 
     </p>
-
-    <br/>
 
     <h2>Recent posts:</h2>
 
@@ -35,25 +33,25 @@
         {% endfor %}
     </table>
 
-    <br/>
-
-    <h2>Recent grams:</h2>
-
-    <div class="row">
-        {% for gram in grams%}
-        <div class="col-xs-3 col-md-3">
-            <a href="{{ gram.url }}" class="grams thumbnail">
-                <img src="{{ gram.photo }}">
-            </a>
-        </div>
-
-        {% endfor %}
+    <h2>Github Activity:</h2>
+    <div class="commits">
+        <table class='table table-condensed'>
+            {% for commit in commits %}
+            <tr>
+                <td>
+                    <a style="font-size: 12px;" href="{{ commit.repo_url }}">{{ commit.repo_name }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="commit-date">{{ commit.date|date:"b d"}}</div><div class="commit-content">{{ commit.message }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
-    </br>
-
-    <h2>Recent tweets:</h2>
-
+    <h2>Tweetin:</h2>
     <div class="tweets">
         <table class='table table-condensed'>
             {% for tweet in tweets %}
