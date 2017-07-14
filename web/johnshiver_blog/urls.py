@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from blog import urls as blog_urls
+from blog.views import MyToolsView
 from blog.views import MainPageView
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     # main app
     url(r'blog/', include(blog_urls)),
     url(r'^$', MainPageView.as_view(), name='home'),
+    url(r'coder/', MyToolsView.as_view(), name='all-posts'),
 ]

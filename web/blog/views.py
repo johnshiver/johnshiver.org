@@ -1,5 +1,5 @@
 from django.core.cache import cache
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, ListView, DetailView
 from utils import SocialMedia
 
@@ -62,3 +62,22 @@ class BlogPostView(DetailView):
         self.object.save()
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+class MyToolsView(DetailView):
+    """
+    Single page view for the tools post I made.
+    """
+    template_name = "single_post.html"
+    context_object_name = "post"
+    model = Post
+    fields = ('title', 'content', 'created', 'author')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.views += 1
+        self.object.save()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+    def get_object(self):
+        return get_object_or_404(Post, pk=5)
