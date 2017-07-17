@@ -30,7 +30,7 @@ postgres:
   volumes_from:
     - data
   ports:
-    - "5433:5433"
+    - "5435:5435"
 
 redis:
   restart: always
