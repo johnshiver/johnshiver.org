@@ -1,0 +1,23 @@
+web:
+  restart: always
+  build: .
+  expose:
+    - "8000"
+  volumes:
+    - ./web:/usr/src/app
+    - ./web/static:/usr/src/app/static
+  env_file: .env
+  #  command: /usr/local/bin/gunicorn johnshiver_blog.wsgi:application -w 2 -b :8000 --reload
+  command: uwsgi --ini /opt/app/uwsgi.ini
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "8001:8001"
+  volumes:
+    - /www/static
+  volumes_from:
+    - web
+  links:
+    - web:web

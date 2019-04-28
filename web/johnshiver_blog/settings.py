@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.johnshiver.org']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'johnshiver_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASS'],
-        'HOST': os.environ['DB_SERVICE'],
-        'PORT': os.environ['DB_PORT']
+        'NAME': os.environ.get('DB_NAME', default='blog'),
+        'USER': os.environ.get('DB_USER', default='john'),
+        'PASSWORD': os.environ.get('DB_PASS', default='blog'),
+        'HOST': os.environ.get('DB_HOST' default='127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', default=8001),
     }
 }
 
@@ -99,7 +99,7 @@ DATABASES = {
 CACHES = {
     "default": {
         'BACKEND': 'redis_cache.RedisCache',
-        "LOCATION": "{0}/{1}".format(os.environ.get('REDIS_1_PORT', default="redis://127.0.0.1:6379"), 0),
+        "LOCATION": os.environ.get('REDIS_HOST_PORT', default="redis://127.0.0.1:6379"), 0),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.

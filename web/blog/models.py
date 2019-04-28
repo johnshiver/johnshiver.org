@@ -12,9 +12,8 @@ class Post(TimeStampedModel):
     slug = models.SlugField(max_length=500, blank=True)
     views = models.IntegerField(default=0)
 
-    @property
-    def __unicode__(self):
-        return self.title
+    def __str__(self):
+        return self.slug
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
